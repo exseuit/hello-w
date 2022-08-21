@@ -5,5 +5,5 @@
 */
 function hello_world()
 {
-  echo "Hello my World! <br>  This ia my test function at github! ";
+  echo "<h1>Hello my World!</h1><h2>This ia my test function at github!</h2>";
 }
