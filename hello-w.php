@@ -2,7 +2,7 @@
 
 /**
  *  Creat log file and folder 
- */
+
 $filename = set_logfilename();
 
 function set_logfilename($tz = 'Europe/Kiev')
@@ -22,7 +22,7 @@ function set_logfilename($tz = 'Europe/Kiev')
   }
   return  $file;
 }
-
+ */
 
 /**
  * Save the result in the log file
