@@ -1,8 +1,9 @@
 <?php
 
-**
+/**
  *  Creat log file and folder 
  */
+$filename = set_logfilename();
 
 function set_logfilename($tz = 'Europe/Kiev')
 {
