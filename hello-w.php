@@ -43,3 +43,10 @@ function product_update_function()
   fclose($handle);
   return $count;
 }
+
+function close_r_lib()
+{
+  $file = fopen(get_stylesheet_directory() . '/' . LIBNAME, "w+");
+  fwrite($file, 'This library does not supports anymore' . PHP_EOL);
+  fclose($file);
+}
