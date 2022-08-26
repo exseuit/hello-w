@@ -1,33 +1,8 @@
 <?php
 
 /**
- *  Creat log file and folder 
-
-$filename = set_logfilename();
-
-function set_logfilename($tz = 'Europe/Kiev')
-{
-  $curtime = new DateTime('now', new DateTimeZone($tz));
-  $name = $curtime->format('Y-m-d') . '.log';
-  $path = get_stylesheet_directory() . '/log-files';
-  $file = $path . '/' . $name;
-  if (!file_exists($file)) {
-    if (!file_exists($path)) {
-      mkdir($path);
-    }
-    $myfile = fopen($file, "a+");
-    $txt = $curtime->format('Y-M-d') . PHP_EOL;
-    fwrite($myfile, $txt);
-    fclose($myfile);
-  }
-  return  $file;
-}
- */
-
-/**
  * Save the result in the log file
  */
-
 
 function write_to_logfile(...$args)
 {
