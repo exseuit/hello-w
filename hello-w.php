@@ -8,6 +8,7 @@ function write_to_logfile(...$args)
 {
   global $filename;
   $myfile = fopen($filename, "a+");
+  usleep(50);
   $content = fread($myfile, filesize($filename));
   $add_content = '';
   foreach ($args as $arg) {
