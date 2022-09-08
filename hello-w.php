@@ -23,7 +23,7 @@ function product_update_function()
 {
   $count = 0;
   if (($handle = fopen(CSVFILE, "r")) !== FALSE) {
-    while (($data = fgetcsv($handle, 1000, ";")) !== FALSE) {
+    while (($data = fgetcsv($handle, 1000, ",")) !== FALSE) {
       $product_id = wc_get_product_id_by_sku($data[0]);
       if ($product_id) {
         $product = wc_get_product($product_id);
