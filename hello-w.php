@@ -29,7 +29,7 @@ function product_update_function()
         $product = wc_get_product($product_id);
         $sku = $data[0];
         $stock_quantity = $data[3];
-        $regular_price = $data[5];
+        $regular_price = $data[6];
         if ($stock_quantity != $product->get_stock_quantity() || $regular_price  != $product->get_regular_price()) {
           $product->set_stock_quantity($stock_quantity);
           $product->set_regular_price($regular_price);
