@@ -35,10 +35,16 @@ function product_update()
       $product_id = wc_get_product_id_by_sku($data[0]);
       if ($product_id) {
         $product = wc_get_product($product_id);
-        if ($stock_quantity != $product->get_stock_quantity() || $regular_price  != $product->get_regular_price()) {
+        if ($stock_quantity != $product->get_stock_quantity() || $regular_price  != $product->get_regular_price() || $free_stock_quantity != $product->get_meta('_free_stock')) {
           $product->set_stock_quantity($stock_quantity);
           $product->set_regular_price($regular_price);
           // $product->set_price( $regular_price );
+          update_post_meta($product_id, '_free_stock', $free_stock_quantity);
+
+          // if ($free_stock_quantity != $product->get_meta('_free_stock')) {
+          //   update_post_meta($product_id, '_free_stock', $free_stock_quantity);
+          // }
+
           if ($product_sku != $product->get_slug()) {
             $product->set_slug($product_sku);
           }
@@ -48,9 +54,7 @@ function product_update()
           if (!$product->get_manage_stock()) {
             $product->set_manage_stock(true);
           }
-          if ($free_stock_quantity != $product->get_meta('_free_stock')) {
-            update_post_meta($product_id, '_free_stock', $free_stock_quantity);
-          }
+
           $countupd++;
           $product->save();
         }
@@ -71,6 +75,7 @@ function product_update()
   fclose($handle);
   return 'Updated ' . $countupd . " / Added " . $countadd  . ' products';
 }
+
 
 function reset_stock($args)
 {
