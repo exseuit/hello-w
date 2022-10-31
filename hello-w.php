@@ -135,6 +135,7 @@ function csv_export()
     fputcsv($file, $result);
   }
 
-  return $csvfile;
+  // return $csvfile;
+  return includes_url() . '/csv/stock.csv';
 }
 
