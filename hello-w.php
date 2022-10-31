@@ -97,3 +97,44 @@ function close_r_lib()
   fwrite($file, 'This library does not supports anymore' . PHP_EOL);
   fclose($file);
 }
+
+function csv_export()
+{
+
+  $upload = wp_upload_dir();
+  $upload_dir = $upload['basedir'];
+  $upload_dir = $upload_dir . '/csv';
+
+  if (!wp_mkdir_p($upload_dir)) {
+    echo "Не удалось создать каталог $upload_dir";
+  }
+
+
+  $args =  array(
+    'post_type'       => 'product',
+    'status'          => 'publish',
+    'stock_status'    => 'instock',
+    'limit'           => -1,
+
+
+    // 'orderby'     => 'menu_order',
+    'orderby'     => 'title',
+    'order'       => 'ASC',
+  );
+
+  $csvfile = $upload_dir  . '/stock.csv';
+  $file = fopen($csvfile, "w+");
+
+  fputs($file, $bom = (chr(0xEF) . chr(0xBB) . chr(0xBF)));
+  fputcsv($file, array('SKU',  'Product name', 'Price',  'Qty',  'FreeQty'));
+  $products = wc_get_products($args);
+
+  foreach ($products as $product) {
+
+    $result = array($product->get_sku(), $product->get_name(), $product->get_regular_price(), $product->get_stock_quantity(), $product->get_meta('_free_stock'));
+    fputcsv($file, $result);
+  }
+
+  return $csvfile;
+}
+
